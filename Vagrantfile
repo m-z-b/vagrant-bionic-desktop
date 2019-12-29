@@ -8,13 +8,15 @@ Vagrant.configure("2") do |config|
     vb.gui = true
     vb.memory =1024 
     vb.cpus = 2
-    vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
+    vb.customize ['modifyvm', :id, '--clipboard-mode', 'bidirectional']
   end
 
   # config.vm.provision "shell", inline: <<-SCRIPT
   #   echo "inline script"
   # SCRIPT
 
+  config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+  #config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: ".ssh/authorized_keys"
 
   config.vm.provision "shell", path: "install-desktop.sh"
   #config.vm.provision "shell", path: "install-chrome.sh"
